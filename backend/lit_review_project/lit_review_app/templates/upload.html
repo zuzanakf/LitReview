@@ -1,0 +1,25 @@
+<!-- lit_review_app/templates/upload.html -->
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert {{ message.tags }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+<h2>Upload Document</h2>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Upload</button>
+</form>
+
+<h3>Your Documents</h3>
+<ul>
+    {% for document in documents %}
+        <li>{{ document.title }}</li>
+    {% empty %}
+        <p>No documents uploaded yet.</p>
+    {% endfor %}
+</ul>
